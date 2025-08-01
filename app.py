@@ -9,6 +9,7 @@ db = SQLAlchemy(app)
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
+    completed = db.Column(db.Boolean, default =False)
 
 with app.app_context():
     db.create_all()
@@ -37,6 +38,17 @@ def delete(id):
         return redirect('/')
     except:
         return 'There was a problem deleting that task'
+    
+@app.route('/toggle/<int:id>', methods=['POST'])
+def toggle(id):
+    task = Todo.query.get_or_404(id)
+    task.completed = not task.completed
+    try:
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was a problem updating the task'
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -7,10 +7,18 @@
         <input type="submit" value="Add">
     </form>
     <ul>
-        {% for task in tasks %}
-            <li>{{ task.content }} 
-                <a href="/delete/{{ task.id }}">[Delete]</a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% for task in tasks %}
+        <li>
+            <form action="/toggle/{{ task.id }}" method="POST" style="display: inline;">
+                <input type="checkbox" onchange="this.form.submit()" {% if task.completed %}checked{% endif %}>
+            </form>
+            <span style="{% if task.completed %}text-decoration: line-through;{% endif %}">
+                {{ task.content }}
+            </span>
+            <a href="/delete/{{ task.id }}">[Delete]</a>
+        </li>
+    {% endfor %}
+</ul>
+
+
 {% endblock %}
