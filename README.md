@@ -28,7 +28,7 @@ This was my first full-stack web application. I used it as a stepping stone to l
 
 ## 📸 Demo
 
-![To-Do screenshot] (screenshot.png)
+![To-Do screenshot] (image.png)
 
 ---
 
